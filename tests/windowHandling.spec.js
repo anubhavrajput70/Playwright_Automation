@@ -1,5 +1,11 @@
 import { test, expect } from '@playwright/test';
 
+//if you want to run your test in the debug mode then you can give --debug in the command line it will
+//open the playwright inspector in the browser
+//if you want to run your test in the headless mode then you can give --headed in the command line
+//if you want to do record and playback you can use codegen
+//npx playwright codegen http://google.com
+
 test('child window handling',async ({browser}) =>{
     const context = await browser.newContext();
     const page = await context.newPage();
