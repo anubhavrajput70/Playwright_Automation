@@ -65,3 +65,24 @@ test('End to End Order Test', async ({ page }) => {
     await page.pause();
 
 });
+
+test('End to End Order Test other way', async ({ page }) => {
+    await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
+    const productName = "ZARA COAT 3";
+    const email="anubhavrajput@gmail.com";
+    const products = page.locator(".card-body");
+    await page.getByPlaceholder("email@example.com").fill(email);
+    await page.getByPlaceholder("enter your passsword").fill("Qwerty@123");
+    await page.getByRole("button", { name: "Login" }).click();
+    await page.locator(".card-body b").first().waitFor();
+    await page.locator(".card-body").filter({ hasText: productName }).getByRole("button", { name: "Add to Cart" }).click();
+    await page.getByRole("listitem").getByRole('button',{name:"Cart"}).click();
+    await page.locator("div li").first().waitFor(); 
+    await expect(page.getByText("ZARA COAT 3")).toBeVisible();
+    await page.getByRole("button",{name:"Checkout"}).click();
+    await page.getByPlaceholder("Select Country").pressSequentially("ind",{delay:100});
+    await page.getByRole("button",{name:"India"}).nth(1).click();
+    await page.getByText("PLACE ORDER").click();
+    await expect(page.getByText("Thankyou for the order. ")).toBeVisible();
+    });
+

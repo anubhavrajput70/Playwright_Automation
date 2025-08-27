@@ -28,7 +28,6 @@ test('child window handling',async ({browser}) =>{
     //textContent() will return the text value of the locator when it initially opened the page
     //inputValue() will return the value which is filled on the page
     console.log(await userName.inputValue());
-    
-    console.log(text);
+    console.log(text); 
 });
     
